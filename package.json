@@ -1,0 +1,34 @@
+{
+  "name": "home-lab-telegram-api",
+  "version": "1.0.0",
+  "description": "Telegram client for send home server message.",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node --env-file=.env .",
+    "dev": "tsc-watch --onSuccess 'npm run start' ",
+    "build": "tsc",
+    "watch-ts": "tsc --watch",
+    "watch-node": "node --env-file=.env --watch . ",
+    "clean": "rimraf dist", 
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mandragora-hub/home-lab-telegram-api.git"
+  },
+  "author": "Mandragora-hub",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mandragora-hub/home-lab-telegram-api/issues"
+  },
+  "homepage": "https://github.com/mandragora-hub/home-lab-telegram-api#readme",
+  "dependencies": {
+    "@types/node": "^20.9.2",
+    "prebuilt-tdlib": "^0.1008019.0",
+    "tdl": "^7.4.0"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5",
+    "tsc-watch": "^6.0.4"
+  }
+}
