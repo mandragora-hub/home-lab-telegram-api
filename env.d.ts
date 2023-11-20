@@ -3,6 +3,7 @@ declare global {
       interface ProcessEnv {
         APP_ID: number;
         APP_HASH: string;
+        PHONE_NUMBER: string
         // NODE_ENV: 'development' | 'production';
         // PORT?: string;
       }
