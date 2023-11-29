@@ -1,9 +1,7 @@
 declare global {
     namespace NodeJS {
       interface ProcessEnv {
-        APP_ID: number;
-        APP_HASH: string;
-        PHONE_NUMBER: string
+        BOT_TOKEN: string
         // NODE_ENV: 'development' | 'production';
         // PORT?: string;
       }

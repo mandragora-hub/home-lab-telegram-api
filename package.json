@@ -9,7 +9,7 @@
     "build": "tsc",
     "watch-ts": "tsc --watch",
     "watch-node": "node --env-file=.env --watch . ",
-    "clean": "rimraf dist", 
+    "clean": "rimraf dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,8 +24,7 @@
   "homepage": "https://github.com/mandragora-hub/home-lab-telegram-api#readme",
   "dependencies": {
     "@types/node": "^20.9.2",
-    "prebuilt-tdlib": "^0.1008019.0",
-    "tdl": "^7.4.0"
+    "grammy": "^1.19.2"
   },
   "devDependencies": {
     "rimraf": "^5.0.5",

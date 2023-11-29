@@ -1,60 +1,114 @@
-import * as tdl from "tdl";
+import { Bot, GrammyError, HttpError, InlineKeyboard } from "grammy";
 
-// If libtdjson is not present in the system search paths, the path to the
-// libtdjson shared library can be set manually, e.g.:
-//   tdl.configure({ tdjson: '/usr/local/lib/libtdjson.dylib' })
-// The library directory can be set separate from the library name,
-// example to search for libtdjson in the directory of the current script:
-//   tdl.configure({ libdir: __dirname })
 
-// Instead of building TDLib yourself, the aforementioned prebuilt-tdlib can be used as follows:
-import { getTdjson } from "prebuilt-tdlib";
-tdl.configure({ tdjson: getTdjson() });
+//Store bot screaming status
+let screaming = false;
 
-const client = tdl.createClient({
-  apiId: process.env.APP_ID, // Your api_id
-  apiHash: process.env.APP_HASH, // Your api_hash
-  databaseDirectory: "./data/_td_database",
-  filesDirectory: "./data/_td_files",
+//Create a new bot
+const bot = new Bot(process.env.BOT_TOKEN);
+
+
+
+//This function handles the /scream command
+bot.command("scream", () => {
+   screaming = true;
+ });
+
+//This function handles /whisper command
+bot.command("whisper", () => {
+   screaming = false;
+ });
+
+//Pre-assign menu text
+// const firstMenu = "<b>Menu 1</b>\n\nA beautiful menu with a shiny inline button.";
+// const secondMenu = "<b>Menu 2</b>\n\nA better menu with even more shiny inline buttons.";
+
+//Pre-assign button text
+// const nextButton = "Next";
+// const backButton = "Back";
+// const tutorialButton = "Tutorial";
+
+//Build keyboards
+// const firstMenuMarkup = new InlineKeyboard().text(nextButton, backButton);
+ 
+// const secondMenuMarkup = new InlineKeyboard().text(backButton, backButton).text(tutorialButton, "https://core.telegram.org/bots/tutorial");
+
+
+//This handler sends a menu with the inline buttons we pre-assigned above
+// bot.command("menu", async (ctx) => {
+//   await ctx.reply(firstMenu, {
+//     parse_mode: "HTML",
+//     reply_markup: firstMenuMarkup,
+//   });
+// });
+
+// //This handler processes back button on the menu
+// bot.callbackQuery(backButton, async (ctx) => {
+//   //Update message content with corresponding menu section
+//   await ctx.editMessageText(firstMenu, {
+//     reply_markup: firstMenuMarkup,
+//     parse_mode: "HTML",
+//    });
+//  });
+
+// //This handler processes next button on the menu
+// bot.callbackQuery(nextButton, async (ctx) => {
+//   //Update message content with corresponding menu section
+//   await ctx.editMessageText(secondMenu, {
+//     reply_markup: secondMenuMarkup,
+//     parse_mode: "HTML",
+//    });
+//  });
+
+bot.hears("ping", async (ctx) => {
+// `reply` is an alias for `sendMessage` in the same chat (see next section).
+await ctx.reply("pong", {
+  // `reply_to_message_id` specifies the actual reply feature.
+  reply_to_message_id: ctx.msg.message_id,
 });
-// Passing apiId and apiHash is mandatory, these values can be obtained at https://my.telegram.org/
-
-client.on("error", console.error);
-
-// Aside of receiving responses to your requests, the server can push to you
-// events called "updates" which ar received as follows:
-client.on("update", (update) => {
-  console.log("Got update:", update);
 });
 
-async function main() {
-  // Log in to a Telegram account. By default, with no arguments, this function will
-  // ask for phone number etc. in the console. Instead of logging in as a user,
-  // it's also possible to log in as a bot using `client.loginAsBot('<TOKEN>')`.
-  await client.login(() => {
-    return {
-      getPhoneNumber: (retry) =>
-        retry
-          ? Promise.reject("Invalid phone number")
-          : Promise.resolve(process.env.PHONE_NUMBER),
-    };
-  });
+//This function would be added to the dispatcher as a handler for messages coming from the Bot API
+bot.on("message", async (ctx) => {
+  //Print to console
+  console.log(
+    `${ctx.from.first_name} wrote ${
+      "text" in ctx.message ? ctx.message.text : ""
+    }`,
+  );
 
-  // Invoke a TDLib method. The information regarding TDLib method list and
-  // documentation is below this code block.
-  const me = await client.invoke({ _: "getMe" });
-  console.log("My user:", me);
+  if (screaming && ctx.message.text) {
+    //Scream the message
+    await ctx.reply(ctx.message.text.toUpperCase(), {
+      entities: ctx.message.entities,
+    });
+  } else {
+    //This is equivalent to forwarding, without the sender's name
+    await ctx.copyMessage(ctx.message.chat.id);
+  }
+});
 
-  // Invoke some other TDLib method.
-  const chats = await client.invoke({
-    _: "getChats",
-    chat_list: { _: "chatListMain" },
-    limit: 10,
-  });
-  console.log("A part of my chat list:", chats);
+// Set bot commands suggestions
+bot.api.setMyCommands([
+  { command: "start", description: "Start the bot" },
+  { command: "menu", description: "display a list of available commands." },
+  { command: "clear", description: "Clear chat." },
+  { command: "help", description: "Show help text" },
+]);
 
-  // Close the instance so that TDLib exits gracefully and the JS runtime can finish the process.
-  await client.close();
-}
+// Error handler
+bot.catch((err) => {
+  const ctx = err.ctx;
+  console.error(`Error while handling update ${ctx.update.update_id}:`);
+  const e = err.error;
+  if (e instanceof GrammyError) {
+    console.error("Error in request:", e.description);
+  } else if (e instanceof HttpError) {
+    console.error("Could not contact Telegram:", e);
+  } else {
+    console.error("Unknown error:", e);
+  }
+});
 
-main().catch(console.error);
+//Start the Bot
+bot.start();
