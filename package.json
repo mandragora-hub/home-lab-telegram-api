@@ -10,6 +10,9 @@
     "watch-ts": "tsc --watch",
     "watch-node": "node --env-file=.env --watch . ",
     "clean": "rimraf dist",
+    "db:migrator": "node src/db/migrator.js",
+    "db:migration:up": "npm run migrator up",
+    "db:migration:down": "npm run migrator down",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,11 +26,19 @@
   },
   "homepage": "https://github.com/mandragora-hub/home-lab-telegram-api#readme",
   "dependencies": {
-    "@types/node": "^20.9.2",
-    "grammy": "^1.19.2"
+    "@grammyjs/conversations": "^1.1.2",
+    "@grammyjs/storage-free": "^2.4.0",
+    "cron": "^3.1.6",
+    "grammy": "^1.19.2",
+    "sequelize": "^6.35.1",
+    "sqlite3": "^5.1.6",
+    "umzug": "^3.4.0"
   },
   "devDependencies": {
+    "@types/node": "^20.10.1",
     "rimraf": "^5.0.5",
-    "tsc-watch": "^6.0.4"
+    "ts-node": "^10.9.1",
+    "tsc-watch": "^6.0.4",
+    "tslib": "^2.6.2"
   }
 }
