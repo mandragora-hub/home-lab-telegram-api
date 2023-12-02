@@ -1,7 +1,7 @@
 import type { MyBotContext, MyBotConversation } from "../types";
 import db from "../db/models";
 
-export async function greetingSubscription(
+export async function dailyReportSubscription(
   conversation: MyBotConversation,
   ctx: MyBotContext
 ) {

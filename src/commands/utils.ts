@@ -1,17 +1,18 @@
 import { Composer } from "grammy";
 import { MyBotContext } from "../types";
+import process from "process";
+import { createTemplate } from "../lib";
 
 export const composer = new Composer<MyBotContext>();
 
 composer.command("status", async (ctx) => {
-  const health = {
-    uptime: process.uptime().toString().replace('.', '\\.'),
+  const healthcheck = {
+    uptime: process.uptime().toString().replace(".", "\\."),
     message: "OK",
     timestamp: Date.now(),
   };
 
-  const response = 
-    `*Uptime:* ${health.uptime}\n*Message:* ${health.message}\n*Timestamp:* ${health.timestamp}`.trim();
+  const response = await createTemplate("healthcheck", healthcheck);
 
   await ctx.reply(response, {
     parse_mode: "MarkdownV2",

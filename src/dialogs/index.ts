@@ -1,2 +1,2 @@
-import { greetingSubscription } from "./register";
-export default { greetingSubscription };
+import { dailyReportSubscription } from "./register";
+export default { dailyReportSubscription };

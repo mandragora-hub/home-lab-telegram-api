@@ -30,11 +30,13 @@
     "@grammyjs/storage-free": "^2.4.0",
     "cron": "^3.1.6",
     "grammy": "^1.19.2",
+    "mustache": "^4.2.0",
     "sequelize": "^6.35.1",
     "sqlite3": "^5.1.6",
     "umzug": "^3.4.0"
   },
   "devDependencies": {
+    "@types/mustache": "^4.2.5",
     "@types/node": "^20.10.1",
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.1",

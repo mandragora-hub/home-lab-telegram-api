@@ -2,7 +2,7 @@ import task from "../tasks";
 import { CronJob } from "cron";
 
 async function mainLoop() {
-  await task.greetingServices();
+  await task.dailyReportServices();
 }
 
 const cron = new CronJob(
