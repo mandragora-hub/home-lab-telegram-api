@@ -1,4 +1,4 @@
-import { Bot, GrammyError, HttpError, InlineKeyboard } from "grammy";
+import { Bot, GrammyError, HttpError } from "grammy";
 import plugins from "../plugins";
 import commands from "../commands";
 import { MyBotContext } from "../types";
@@ -9,56 +9,8 @@ const bot = new Bot<MyBotContext>(process.env.BOT_TOKEN);
 bot.use(plugins.installSession);
 bot.use(plugins.installConversation);
 
-bot.use(commands.utils)
-
-let chatId: string | number = "";
-bot.command('register', async (ctx) => {
-  const chat   =await ctx.getChat();
-  chatId = chat.id;
-});
-
-
-
-
-//Pre-assign menu text
-// const firstMenu = "<b>Menu 1</b>En\nA beautiful menu with a shiny inline button.";
-// const secondMenu = "<b>Menu 2</b>\n\nA better menu with even more shiny inline buttons.";
-
-//Pre-assign button text
-// const nextButton = "Next";
-// const backButton = "Back";
-// const tutorialButton = "Tutorial";
-
-//Build keyboards
-// const firstMenuMarkup = new InlineKeyboard().text(nextButton, backButton);
-
-// const secondMenuMarkup = new InlineKeyboard().text(backButton, backButton).text(tutorialButton, "https://core.telegram.org/bots/tutorial");
-
-//This handler sends a menu with the inline buttons we pre-assigned above
-// bot.command("menu", async (ctx) => {
-//   await ctx.reply(firstMenu, {
-//     parse_mode: "HTML",
-//     reply_markup: firstMenuMarkup,
-//   });
-// });
-
-// //This handler processes back button on the menu
-// bot.callbackQuery(backButton, async (ctx) => {
-//   //Update message content with corresponding menu section
-//   await ctx.editMessageText(firstMenu, {
-//     reply_markup: firstMenuMarkup,
-//     parse_mode: "HTML",
-//    });
-//  });
-
-// //This handler processes next button on the menu
-// bot.callbackQuery(nextButton, async (ctx) => {
-//   //Update message content with corresponding menu section
-//   await ctx.editMessageText(secondMenu, {
-//     reply_markup: secondMenuMarkup,
-//     parse_mode: "HTML",
-//    });
-//  });
+bot.use(commands.register);
+bot.use(commands.utils);
 
 // Set bot commands suggestions
 bot.api.setMyCommands([
