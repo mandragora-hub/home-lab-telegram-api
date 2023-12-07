@@ -122,5 +122,5 @@
     // "excludeFiles": ["build/fileWhichChangesOften.ts"]
   },
   // "exclude": ["node_modules", "dist"],
-  // "include": ["src/", "env.d.ts", "tdlib-types.d"]
+  // "include": ["src/templates/*", "env.d.ts"]
 }
