@@ -10,6 +10,7 @@ bot.use(plugins.installSession);
 bot.use(plugins.installConversation);
 
 bot.use(commands.register);
+bot.use(commands.setting);
 bot.use(commands.utils);
 
 // Set bot commands suggestions

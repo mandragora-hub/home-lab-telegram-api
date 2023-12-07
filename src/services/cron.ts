@@ -6,7 +6,7 @@ async function mainLoop() {
 }
 
 const cron = new CronJob(
-  "*/5 * * * * *", // cronTime
+  "*/10 * * * * *", // cronTime
   mainLoop, // onTick
   null, // onComplete
   false, // start automatically

@@ -4,6 +4,7 @@
         "dylib",
         "grammyjs",
         "libtdjson",
+        "setname",
         "tdjson",
         "tdlib",
         "tsnd",

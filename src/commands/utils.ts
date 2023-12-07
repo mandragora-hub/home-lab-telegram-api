@@ -5,9 +5,21 @@ import { createTemplate } from "../lib";
 
 export const composer = new Composer<MyBotContext>();
 
+composer.command("start", async (ctx) => {
+  const message = await createTemplate("welcome-message", null);
+  await ctx.reply(message, { parse_mode: "MarkdownV2" });
+});
+
+composer.command("help", async (ctx) => {
+  const message = await createTemplate("help", null);
+  await ctx.reply(message, {
+    parse_mode: "MarkdownV2",
+  });
+});
+
 composer.command("status", async (ctx) => {
   const healthcheck = {
-    uptime: process.uptime().toString().replace(".", "\\."),
+    uptime: process.uptime(),
     message: "OK",
     timestamp: Date.now(),
   };

@@ -4,7 +4,6 @@ import { createHtmlTemplate } from "../lib";
 
 export const composer = new Composer<MyBotContext>();
 
-// Pre-assign menu text
 const dailyReportSubscriptionButton = "daily_report_subscription";
 const cancelButton = "cancel";
 
@@ -21,5 +20,15 @@ const firstMenuMarkup = new InlineKeyboard()
   .text("Cancel", cancelButton)
   .text("Daily Report Subscription", dailyReportSubscriptionButton);
 composer.callbackQuery(dailyReportSubscriptionButton, async (ctx) => {
-  await ctx.conversation.enter("daily_report_subscription");
+  // await conversation.external(async () => {
+  //   db.users
+  //   .create({
+  //       name: text,
+  //       chatId: ctx.chat!.id,
+  //     })
+  //     .catch((err) => {
+  //       throw new Error(err);
+  //     });
+  //   });
+  await ctx.reply("todo");
 });

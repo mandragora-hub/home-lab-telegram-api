@@ -1,2 +1,2 @@
-import { dailyReportSubscription } from "./register";
-export default { dailyReportSubscription };
+import { changeUsername } from "./settings";
+export default { changeUsername };
