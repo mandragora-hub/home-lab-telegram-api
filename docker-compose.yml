@@ -1,0 +1,9 @@
+services:
+  home-lab-telegram:
+    build: .
+    image: 'mandragorahub/home-lab-telegram'
+    container_name: home-lab-telegram 
+    restart: on-failure
+    env_file: .env
+    volumes:
+      - ./data:/app/data
