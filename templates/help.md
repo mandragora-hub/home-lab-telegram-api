@@ -9,4 +9,4 @@ Redania bot - Help menu
 
 *Utils*
 /status             Show health status
-/ping               Test replication capability
+ping                Test replication capability

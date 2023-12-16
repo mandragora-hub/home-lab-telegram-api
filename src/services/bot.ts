@@ -16,9 +16,10 @@ bot.use(commands.utils);
 // Set bot commands suggestions
 bot.api.setMyCommands([
   { command: "start", description: "Start the bot" },
-  { command: "menu", description: "display a list of available commands." },
-  { command: "clear", description: "Clear chat." },
-  { command: "help", description: "Show help text" },
+  { command: "help", description: "Display a list of available commands." },
+  { command: "register", description: "register to daily message" },
+  { command: "setname", description: "Set/change the username" },
+  { command: "status", description: "Show bot status" },
 ]);
 
 // Error handler
