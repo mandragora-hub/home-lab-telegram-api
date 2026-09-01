@@ -3,6 +3,7 @@ declare global {
     interface ProcessEnv {
       BOT_TOKEN: string;
       API_NINJA_TOKEN: string;
+      GOOGLE_AI_TOKEN: string;
       // NODE_ENV: 'development' | 'production';
       // PORT?: string;
     }

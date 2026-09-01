@@ -12,6 +12,7 @@ bot.use(plugins.installConversation);
 bot.use(commands.register);
 bot.use(commands.setting);
 bot.use(commands.utils);
+bot.use(commands.gemini);
 
 // Set bot commands suggestions
 bot.api.setMyCommands([

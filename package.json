@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/mandragora-hub/home-lab-telegram-api#readme",
   "dependencies": {
+    "@google/generative-ai": "^0.1.2",
     "@grammyjs/conversations": "^1.1.2",
     "@grammyjs/storage-free": "^2.4.0",
     "commonmark": "^0.30.0",
